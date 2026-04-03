@@ -1,21 +1,38 @@
-# Weather Dashboard
+# 🌤️ Weather Dashboard
 
-A weather app that fetches real-time weather data for any city using the OpenWeatherMap API.
+A real-time weather app built with vanilla JavaScript and the OpenWeatherMap API.
+Fetches live weather data for any city in the world instantly.
 
-## Features
-- Search weather by city name
-- Displays temperature, humidity, pressure, wind speed, and condition
+## 🚀 Live Demo
+[View Live](https://adrish-mage.github.io/web-dev-journey/weather-app/)
+
+## ✨ Features
+- Search weather by any city name
+- Displays temperature, humidity, pressure, wind speed, and sky condition
 - Error handling for invalid city names
+- Clean, minimal UI
 
-## Tech Stack
-- HTML, CSS, JavaScript
+## 🛠️ Tech Stack
+- HTML5
+- CSS3
+- JavaScript (ES6+)
 - Fetch API + Async/Await
 - OpenWeatherMap API
 
-## How to Use
-1. Enter a city name in the search box
-2. Click Search or press Enter
-3. View current weather data
+## 📸 Preview
+![Weather Dashboard Preview](preview.png)
 
-## Live Demo
-[Weather Dashboard](https://adrish-mage.github.io/web-dev-journey/weather-app/)
+## 🔧 Run Locally
+1. Clone the repo
+```bash
+   git clone https://github.com/adrish-mage/web-dev-journey.git
+```
+2. Open `weather-app/index.html` in your browser
+3. Search any city and see live weather
+
+## 📌 Note
+This is a learning project built while studying JavaScript async patterns and REST APIs.
+Part of my [web-dev-journey](https://github.com/adrish-mage/web-dev-journey) repository.
+
+## 👤 Author
+**Adrish** — [GitHub](https://github.com/adrish-mage)
