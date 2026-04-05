@@ -3,23 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel = "stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-
-    <h1> Weather Dashboard </h1>
-    <h3> Enter City Name and know its weather !</h3>
-    <input type = "text" placeholder="Enter City Name">
-    <button>Search</button>
-    <div>
-        <p id="pressure"></p>
-        <p id="humidity"></p>
-        <p id="temp_max"></p>
-        <p id="temp_min"></p>
-        <p id="ground_level"></p>
-        <p id="weather"></p>
+    <div class="left-panel">
+        <div class="top-bar">
+            <div class="brand"></div>
+            <div class="location-chip">
+                <span class="icon"></span>
+                <div class="chip-label"></div>
+                <div class="chip-city"></div>
+            </div>
+        </div>
+        <div class="hero">
+            <h1>The only weather forecast you need</h1>
+            <div class="underline"></div>
+            <div class="search-bar">
+                <input type="text" id="cityInput" placeholder="Enter Location" />
+                <button id="searchBtn"></button>
+            </div>
+        </div>
     </div>
-    <script src = "app.js" ></script>
+    <div class="right-panel">
+        <h2>Today</h2>
+        <div class="weather-card">
+            <p class="big-temp" id="temp">32°</p>
+            <p class="condition" id="weather">Sunny ⛅</p>
+            <p class="feels" id="feelsLike">Feels like 28°</p>
+            <div class="details">
+                <p class="pressure" id = "pressure">pressure</p>
+                <p class="humidity" id = "humidity">humidity</p>
+                <p class="temp_max" id = "temp_max">temp_max</p>
+                <p class="temp_min" id = "temp_min">temp_min</p>
+                <p class="ground-level" id = "ground_level">ground_level</p>
+            </div>
+            
+        </div>
+    </div>
+    <script src="app.js"></script>
 </body>
 </html>

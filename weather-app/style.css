@@ -1,0 +1,381 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --white: #ffffff;
+    --black: #111111;
+    --gray: #888888;
+    --light-gray: #f4f4f4;
+    --chip-bg: rgba(60, 55, 45, 0.75);
+    --search-bg: rgba(255, 255, 255, 0.18);
+    --search-border: rgba(255, 255, 255, 0.35);
+    --red-accent: #c0392b;
+    --transition-slide: 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    --transition-fade: 0.45s ease;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* ─── App shell ─── */
+.app {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* ─── Left panel ─── */
+.left-panel {
+    flex: 1;
+    position: relative;
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-position: center;
+    transition: border-radius var(--transition-slide);
+    overflow: hidden;
+    min-width: 0;
+}
+
+/* Dark overlay so text is readable */
+.left-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0.05) 40%,
+        rgba(0,0,0,0.3) 100%
+    );
+    z-index: 0;
+}
+
+.left-panel.shifted {
+    border-radius: 0 36px 36px 0;
+}
+
+/* ─── Top bar ─── */
+.top-bar {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem 2.5rem;
+}
+
+.brand {
+    font-size: 1.15rem;
+    font-weight: 400;
+    color: var(--white);
+    letter-spacing: 0.05em;
+}
+
+.location-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--chip-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 14px;
+    padding: 0.65rem 1.2rem;
+}
+
+.pin-icon {
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.chip-label {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.65);
+    font-weight: 400;
+    letter-spacing: 0.03em;
+}
+
+.chip-city {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-top: 0.1rem;
+}
+
+/* ─── Hero section ─── */
+.hero {
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 100%;
+    padding: 0 3rem;
+}
+
+.hero h1 {
+    font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.2rem;
+}
+
+.hero-underline {
+    width: 220px;
+    height: 2.5px;
+    background: var(--white);
+    margin: 0 auto 2.2rem;
+    border-radius: 2px;
+    opacity: 0.85;
+}
+
+/* ─── Search box ─── */
+.search-box {
+    display: flex;
+    align-items: center;
+    background: var(--search-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--search-border);
+    border-radius: 100px;
+    padding: 0.85rem 0.85rem 0.85rem 1.8rem;
+    max-width: 520px;
+    margin: 0 auto;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-box:focus-within {
+    border-color: rgba(255,255,255,0.6);
+    box-shadow: 0 0 0 4px rgba(255,255,255,0.08);
+}
+
+#cityInput {
+    flex: 1;
+    background: none;
+    border: none;
+    outline: none;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--white);
+    caret-color: var(--white);
+}
+
+#cityInput::placeholder {
+    color: rgba(255,255,255,0.6);
+}
+
+#searchBtn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    width: 42px;
+    height: 42px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background 0.15s, transform 0.15s;
+    flex-shrink: 0;
+}
+
+#searchBtn:hover {
+    background: rgba(255,255,255,0.15);
+}
+
+#searchBtn:active {
+    transform: scale(0.92);
+}
+
+.search-icon {
+    width: 20px;
+    height: 20px;
+    color: var(--white);
+}
+
+/* ─── Right panel ─── */
+.right-panel {
+    width: 0;
+    opacity: 0;
+    overflow: hidden;
+    background: var(--white);
+    flex-shrink: 0;
+    transition:
+        width var(--transition-slide),
+        opacity var(--transition-fade);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right-panel.open {
+    width: 42%;
+    opacity: 1;
+}
+
+.right-content {
+    padding: 3rem 3.5rem;
+    opacity: 0;
+    transform: translateY(16px);
+    transition:
+        opacity 0.4s ease 0.3s,
+        transform 0.4s ease 0.3s;
+}
+
+.right-panel.open .right-content {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ─── Today heading ─── */
+.today-label {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--black);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 1.8rem;
+}
+
+/* ─── Weather card ─── */
+.weather-card {
+    background: var(--white);
+    border-radius: 24px;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.09), 0 1px 4px rgba(0,0,0,0.06);
+    padding: 2rem 2.2rem;
+}
+
+.big-temp {
+    font-size: 3.8rem;
+    font-weight: 700;
+    color: var(--black);
+    letter-spacing: -0.03em;
+    line-height: 1;
+    margin-bottom: 0.6rem;
+}
+
+.condition {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--black);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.feels {
+    font-size: 1rem;
+    color: var(--gray);
+    letter-spacing: 0.06em;
+    font-weight: 400;
+    margin-bottom: 1.4rem;
+}
+
+.divider {
+    height: 1px;
+    background: #ebebeb;
+    margin-bottom: 1.4rem;
+}
+
+/* Stats below divider */
+.stats-row {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.stat-label {
+    font-size: 0.72rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+
+.stat-value {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.more-link {
+    font-size: 0.9rem;
+    color: var(--red-accent);
+    cursor: pointer;
+    font-weight: 500;
+    margin-top: 0.5rem;
+    display: inline-block;
+}
+
+.more-link:hover {
+    text-decoration: underline;
+}
+
+/* ─── Error state ─── */
+.error-msg {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(30,20,20,0.85);
+    backdrop-filter: blur(10px);
+    color: #ff8080;
+    font-size: 0.85rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: 100px;
+    white-space: nowrap;
+    animation: fadeUp 0.3s ease;
+}
+
+@keyframes fadeUp {
+    from { opacity: 0; transform: translate(-50%, 8px); }
+    to   { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+    .app {
+        flex-direction: column;
+    }
+
+    .left-panel {
+        flex: none;
+        height: 55vh;
+    }
+
+    .left-panel.shifted {
+        border-radius: 0 0 36px 36px;
+    }
+
+    .right-panel.open {
+        width: 100%;
+        height: 45vh;
+    }
+
+    .right-content {
+        padding: 2rem;
+    }
+
+    .today-label {
+        font-size: 2.5rem;
+    }
+}
