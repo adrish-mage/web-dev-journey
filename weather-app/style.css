@@ -23,7 +23,7 @@ html, body {
     height: 100%;
     overflow: hidden;
     font-family: 'Outfit', sans-serif;
-    background-image: url("image.png");
+    background-image: url("./image.png");
 }
 
 /* ─── App shell ─── */
