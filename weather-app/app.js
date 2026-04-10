@@ -1,40 +1,63 @@
+let cityInput = document.getElementById("cityInput");
+let searchBtn = document.getElementById("searchBtn");
+let leftPanel = document.getElementById("leftPanel");
+let rightPanel = document.getElementById("rightPanel");
+let errorMsg = document.getElementById("errorMsg");
+let locationChip = document.getElementById("locationChip");
 
+let conditionEmojis = {
+    "Clear": "☀️",
+    "Clouds": "⛅",
+    "Rain": "🌧️",
+    "Drizzle": "🌦️",
+    "Thunderstorm": "⛈️",
+    "Snow": "❄️",
+    "Mist": "🌫️",
+    "Fog": "🌫️",
+    "Haze": "🌫️"
+};
 
-
-let search = document.querySelector("button");
-
-search.addEventListener("click",() =>{
-    
-    let city = document.querySelector("input").value;
-    
-    getWeather(city);
-})
-let input = (document.querySelector("input"));
-
-input.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-        getWeather(input.value);
-    }
-});
-
-
-async function getWeather(city){
-    search.innerText = "Fetching...";
-    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=b630ff04fd9c87fb406cf269561f2821&units=metric`);
-    search.innerText = "Search";
-    let data = await response.json();
-
-    if (data.cod === "404"){
-        document.getElementById("pressure").innerText = "City NOT FOUND ! Try Again";
-        return;
-    }
-    console.log(data);
-    document.getElementById("pressure").innerText = `Pressure : ${data.main.pressure}`;
-    document.getElementById("humidity").innerText = `Humidity : ${data.main.humidity}`;
-    document.getElementById("temp_max").innerText = `Maximum Temperature : ${data.main.temp_max}`;
-    document.getElementById("temp_min").innerText = `Minimum Temperature : ${data.main.temp_min}`;
-    document.getElementById("ground_level").innerText = `Ground level : ${data.main.grnd_level}`;
-    document.getElementById("weather").innerText = `Weather: ${data.weather[0].main}`;
-    
+function showError(msg) {
+    errorMsg.innerText = msg;
+    errorMsg.style.display = "block";
+    setTimeout(() => {
+        errorMsg.style.display = "none";
+    }, 3000);
 }
 
+async function getWeather(city) {
+    if (city.trim() === "") return;
+
+    let response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=b630ff04fd9c87fb406cf269561f2821&units=metric`);
+    let data = await response.json();
+
+    if (data.cod === "404") {
+        showError("City not found. Try again.");
+        return;
+    }
+
+    let emoji = conditionEmojis[data.weather[0].main] || "🌡️";
+
+    document.getElementById("temp").innerText = `${Math.round(data.main.temp)}°`;
+    document.getElementById("condition").innerText = `${data.weather[0].main} ${emoji}`;
+    document.getElementById("feelsLike").innerText = `Feels like ${Math.round(data.main.feels_like)} °`;
+    document.getElementById("humidity").innerText = `${data.main.humidity}%`;
+    document.getElementById("wind").innerText = `${data.wind.speed} m/s`;
+    document.getElementById("pressure").innerText = `${data.main.pressure} hPa`;
+
+    document.getElementById("chipCity").innerText = `${data.name}, ${data.sys.country}`;
+    locationChip.style.display = "flex";
+
+    leftPanel.classList.add("shifted");
+    rightPanel.classList.add("open");
+}
+
+searchBtn.addEventListener("click", () => {
+    getWeather(cityInput.value);
+});
+
+cityInput.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+        getWeather(cityInput.value);
+    }
+});

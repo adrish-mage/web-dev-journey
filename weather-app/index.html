@@ -3,44 +3,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
 </head>
 <body>
-    <div class="left-panel">
+
+<div class="app">
+
+    <!-- LEFT PANEL -->
+    <div class="left-panel" id="leftPanel">
+
         <div class="top-bar">
-            <div class="brand"></div>
-            <div class="location-chip">
-                <span class="icon"></span>
-                <div class="chip-label"></div>
-                <div class="chip-city"></div>
+            <p class="brand">forecast</p>
+            <div class="location-chip" id="locationChip" style="display:none;">
+                <span class="pin-icon">📍</span>
+                <div>
+                    <p class="chip-label">Current Location</p>
+                    <p class="chip-city" id="chipCity">—</p>
+                </div>
             </div>
         </div>
+
         <div class="hero">
-            <h1>The only weather forecast you need</h1>
-            <div class="underline"></div>
-            <div class="search-bar">
-                <input type="text" id="cityInput" placeholder="Enter Location" />
-                <button id="searchBtn"></button>
+            <h1>The Only Weather Forecast You Need</h1>
+            <div class="hero-underline"></div>
+            <div class="search-box">
+                <input type="text" id="cityInput" placeholder="Enter Location" autocomplete="off" />
+                <button id="searchBtn">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="error-msg" id="errorMsg">City not found. Try again.</div>
+
+    </div>
+
+    <!-- RIGHT PANEL -->
+    <div class="right-panel" id="rightPanel">
+        <div class="right-content">
+            <h2 class="today-label">Today</h2>
+            <div class="weather-card">
+                <p class="big-temp" id="temp">—°</p>
+                <p class="condition" id="condition">—</p>
+                <p class="feels" id="feelsLike">Feels like —°</p>
+                <div class="divider"></div>
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <span class="stat-label">Humidity</span>
+                        <span class="stat-value" id="humidity">—</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Wind</span>
+                        <span class="stat-value" id="wind">—</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Pressure</span>
+                        <span class="stat-value" id="pressure">—</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="right-panel">
-        <h2>Today</h2>
-        <div class="weather-card">
-            <p class="big-temp" id="temp">32°</p>
-            <p class="condition" id="weather">Sunny ⛅</p>
-            <p class="feels" id="feelsLike">Feels like 28°</p>
-            <div class="details">
-                <p class="pressure" id = "pressure">pressure</p>
-                <p class="humidity" id = "humidity">humidity</p>
-                <p class="temp_max" id = "temp_max">temp_max</p>
-                <p class="temp_min" id = "temp_min">temp_min</p>
-                <p class="ground-level" id = "ground_level">ground_level</p>
-            </div>
-            
-        </div>
-    </div>
-    <script src="app.js"></script>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
